@@ -146,6 +146,37 @@ class API extends CI_Controller
 			echo "F";
 		}
 	}
+	
+	public function hotspotServerProfileAdd(){
+		checkLoginAjax();
+		$ip_address  = $this->input->post('_ip_address');
+		$username  = $this->input->post('_username');
+		$password  = $this->input->post('_password');
+		$token  = $this->input->post('_token');
+		$name  = $this->input->post('_name');
+		$hotspot_address  = $this->input->post('_address_hotspot');
+		$dns_name  = $this->input->post('_dns');
+		$htmldir  = $this->input->post('_htmldir');
+		$port = $this->input->post('_port');
+
+		__check(array($ip_address,$username,$password,$port,$name,$hotspot_address,$dns_name,$htmldir));
+		validateToken($token);
+
+
+		if ($this->connectRouter($ip_address, $username, $password,$port)) {
+			$this->RouterOS->comm("/ip/hotspot/profile/add", array(
+				"name"     => $name,
+				"hotspot-address" => $hotspot_address,
+				"dns-name" => $dns_name,
+				"html-directory" => $htmldir,
+			));
+			$this->RouterOS->disconnect();
+
+			echo "T";
+		} else {
+			echo "F";
+		}
+	}
 
 	public function deleteHotspotServerProfile(){
 		checkLoginAjax();
@@ -244,7 +275,7 @@ class API extends CI_Controller
 			$read = $this->RouterOS->read(false);
 			$data = $this->RouterOS->parseResponse($read);
 			
-			var_dump(json_encode($data));
+			echo (json_encode($data));
 		} else {
 			echo "F";
 		}

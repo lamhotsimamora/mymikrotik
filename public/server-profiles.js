@@ -102,8 +102,19 @@ let $form_data = new Vue({
                     try {
                         let $obj = JSON.parse($response);
 
+                        let $directory_filter = [];
+                        let index_dir = 0;
+                        for (let index = 0; index < $obj.length; index++) {
+                            const type = $obj[index].type;
+
+                            if (type === 'directory') {
+                                $directory_filter[index_dir] = $obj[index];
+                                index_dir++;
+                            }
+                        }
+
                         if ($obj) {
-                            this.data_htmldirectory = $obj;
+                            this.data_htmldirectory = $directory_filter;
                         } else {
                             this.data_htmldirectory = null;
                         }
@@ -119,25 +130,38 @@ let $form_data = new Vue({
                 return;
             }
 
+            if (this.hotspot_address == null || this.hotspot_address === '') {
+                this.$refs.hotspot_address.focus();
+                return;
+            }
+
+            if (this.name == null || this.dns_name === '') {
+                this.$refs.dns_name.focus();
+                return;
+            }
+
             jnet({
-                url: URL_API_IP_ADDRESS_ADD,
+                url: URL_API_HOTSPOT_SERVER_PROFILE_ADD,
                 method: 'post',
                 data: {
                     _token: _TOKEN_,
                     _ip_address: $ip_address,
                     _username: $username,
                     _password: $password,
-                    _interface: this.interface,
-                    _ipaddress: this.ip_address,
+                    _name: this.name,
+                    _address_hotspot: this.hotspot_address,
+                    _dns: this.dns_name,
+                    _htmldir: this.htmldirectory,
                     _port: $port
                 }
             }).request($response => {
                 if ($response) {
                     if ($response === 'T') {
-                        $ipaddress.loadData();
-                        this.nterface = null;
-                        this.ip_address = null;
-                        alert("IP Address berhasil ditambahkan");
+                        $data_hotspot_profiles.loadData();
+                        this.name = null;
+                        this.hotspot_address = null;
+                        this.dns_name = null;
+                        alert("Hotspot SErver Profile berhasil ditambahkan");
                     } else {
                         alert("Gagal tambah data");
                     }

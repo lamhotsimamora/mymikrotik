@@ -124,6 +124,8 @@ const URL_API_HOTSPOT_SERVER_ADD = `${URL_SERVER}api/hotspotServerAdd`;
 const URL_API_HOTSPOT_SERVER_DELETE = `${URL_SERVER}api/hotspotServerDelete`;
 const URL_API_FILE_DIRECTORY_GET = `${URL_SERVER}api/htmlDirectoryGet`;
 
+const URL_API_HOTSPOT_SERVER_PROFILE_ADD = `${URL_SERVER}api/hotspotServerProfileAdd`;
+
 // ==================================
 
 
