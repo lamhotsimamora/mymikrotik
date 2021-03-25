@@ -5,7 +5,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 <html lang="en">
 
 <head>
-    <title>Change Password</title>
+    <title>Change Username & Password</title>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="<?= base_url('public/'); ?>css/bootstrap.min.css" />
@@ -64,23 +64,28 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
                         </div>
                         <div class="widget-content nopadding collapse in">
-                            <div id="change-password" class="widget-content nopadding">
+                            <div id="username-password" class="widget-content nopadding">
                                 <form class="form-horizontal">
                                     <div class="control-group">
-                                        <label class="control-label">New Username</label>
+                                        <label class="control-label">Username</label>
                                         <div class="controls">
                                             <input v-model="new_username" ref="new_username" type="text" class="span11"
-                                                placeholder="First name" />
+                                                placeholder="New Username" />
                                         </div>
                                     </div>
                                     <div class="control-group">
-                                        <label class="control-label">New Password</label>
+                                        <label class="control-label">Password</label>
                                         <div class="controls">
-                                            <input v-model="new_password" type="password" class="span11"
-                                                placeholder="Enter Password" />
+                                            <input v-model="new_password" :type="type_password" class="span11"
+                                                placeholder="New Password" />
+                                                <h6>
+                                                <a @click="showPassword" href="#">Show Password</a>
+                                               
+                                                </h6> 
                                         </div>
+                                      
                                     </div>
-
+                                   
                                     <div class="form-actions">
                                     <center>
                                         <button type="button" @click="update" class="btn btn-success">Save</button>
@@ -124,7 +129,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
     <script src="<?= base_url('public/') ?>auth-login.js"></script>
 
 
-    <script src="<?= base_url('public/') ?>change-password.js"></script>
+    <script src="<?= base_url('public/') ?>username-password.js"></script>
 
     <script>
 

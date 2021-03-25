@@ -66,10 +66,10 @@ class Admin extends CI_Controller
 	}
 
 
-	public function change_password(){
+	public function username_password(){
 		checkLogin();
 		$data['username_'] = $_COOKIE['username_'];
-		$this->load->view('change-password',$data);
+		$this->load->view('username-password.php',$data);
 	}
 
 	public function setting(){
@@ -332,7 +332,7 @@ class Admin extends CI_Controller
 		}
 	}
 
-	public function changePassword(){
+	public function changeUsernamePassword(){
 		checkLoginAjax();
 
 		$token    = $this->input->post('_token');

@@ -1,21 +1,31 @@
 new Vue({
-    el: '#change-password',
+    el: '#username-password',
     data: {
         new_username: null,
-        new_password: null
+        new_password: null,
+        type_password: 'password'
     },
     methods: {
+        showPassword: function() {
+            if (this.type_password === 'password') {
+                this.type_password = 'text';
+            } else {
+                this.type_password = 'password';
+            }
+        },
         update: function() {
             if (this.new_username == null || this.new_username === '') {
                 this.$refs.new_username.focus();
+                return;
             }
             if (this.new_password == null || this.new_password === '') {
                 this.$refs.new_password.focus();
+                return;
             }
             var r = confirm("Yakin password aplikasi ini mau diganti ?");
             if (r == true) {
                 jnet({
-                    url: URL_API_CHANGE_PASSWORD,
+                    url: URL_API_USERNAME_PASSWORD,
                     method: 'post',
                     data: {
                         _token: _TOKEN_,

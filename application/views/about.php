@@ -73,7 +73,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
         <div class="widget-content">
             <div class="bs-docs-example">
               <h3>
-                  <center>Aplikasi MyMikrotik</center>
+                  <center>MyMikrotik</center>
               </h3>
               <hr>
               <h4>

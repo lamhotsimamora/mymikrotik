@@ -11,7 +11,7 @@ const URL_API_LOGIN = `${URL_SERVER}admin/proccessLogin`;
 const URL_API_CHECK_LOGIN = `${URL_SERVER}admin/checkLogin`;
 
 
-const URL_API_CHANGE_PASSWORD = `${URL_SERVER}admin/changePassword`;
+const URL_API_USERNAME_PASSWORD = `${URL_SERVER}admin/changeUsernamePassword`;
 
 
 const URL_API_SAVE_ROUTER = `${URL_SERVER}admin/saveRouter`;

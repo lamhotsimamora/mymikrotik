@@ -11,7 +11,7 @@
                         data-target="#profile-messages" class="dropdown-toggle"><i class="icon icon-user"></i> <span
                             class="text">Welcome '.$username_.'</span><b class="caret"></b></a>
                     <ul class="dropdown-menu">
-                        <li><a style="cursor: pointer"  onclick="goToChangePassword();"><i class="icon icon-unlock"></i> Change Password</a></li>
+                        <li><a style="cursor: pointer"  onclick="goToChangePassword();"><i class="icon icon-unlock"></i> Username & Password</a></li>
                         <li><a style="cursor: pointer" onclick="goToSetting();"><i class="icon icon-cogs"></i> Setting</a></li>
                         <li><a style="cursor: pointer" onclick="goToNewTab();"><i class="icon icon-external-link"></i> New Tab</a></li>
                         </ul>
