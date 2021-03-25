@@ -1,3 +1,7 @@
+String.prototype._replace = function(s, r) { return this.split(s).join(r) };
+
+
+
 let $interface = new Vue({
     el: '#ipdns',
     data: {
@@ -30,6 +34,9 @@ let $interface = new Vue({
                     }
                 }
             })
+        },
+        replaceToBr: function($data) {
+            return $data._replace(',', '</br>');
         }
     },
     mounted() {

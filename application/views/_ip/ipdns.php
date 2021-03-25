@@ -93,8 +93,8 @@
                                 </thead>
                                 <tbody>
                                     <tr v-for="(data) in data_ipdns">
-                                        <td>
-                                            <strong>{{data.servers}}</strong>
+                                        <td v-html="replaceToBr(data.servers)">
+                                            <strong></strong>
                                         </td>
                                         <td>{{data['allow-remote-requests']}}</td>
                                         <td>{{data['dynamic-servers']}}</td>

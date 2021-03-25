@@ -126,7 +126,7 @@ let $content_to_print =  new Vue({
 
                     if (index==$max_number_print){
                        Garuda('template_enter').setHtml(htmlEnter());
-                       break;
+                      // break;
                     }
             }
             this.data_user = $data_voucher;
