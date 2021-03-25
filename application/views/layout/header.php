@@ -28,7 +28,7 @@
 <script>
 function goToChangePassword() {
     saveSidebarActive('sidebar_password_front')
-    window.location.href = "<?= base_url('admin/change_password') ?>";
+    window.location.href = "<?= base_url('admin/username_password') ?>";
 }
 function goToSetting() {
     saveSidebarActive('sidebar_setting_front')

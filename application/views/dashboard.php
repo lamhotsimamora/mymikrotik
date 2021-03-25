@@ -96,9 +96,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                     <div class="widget-box">
 
                         <div id="placeholder2"></div>
-                        <p>Time between updates:
-                            <input id="updateInterval" type="text" value="" style="text-align: right; width:5em">
-                            milliseconds</p>
+                      
                     </div>
                 </div>
 
@@ -172,8 +170,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
     <script type="text/javascript">
     $(function() {
-        // we use an inline data source in the example, usually data would
-        // be fetched from a server
+      
         var data = [],
             totalPoints = 300;
 
@@ -240,11 +237,9 @@ defined('BASEPATH') or exit('No direct script access allowed');
     });
     </script>
     <script type="text/javascript">
-    // This function is called from the pop-up menus to transfer to
-    // a different page. Ignore if the value returned is a null string:
+   
     function goPage(newURL) {
 
-        // if url is empty, skip the menu dividers and reset the menu selection to default
         if (newURL != "") {
 
             // if url is "-", it is this page -- reset the menu:
@@ -258,7 +253,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
         }
     }
 
-    // resets the menu selection upon entry to this page:
     function resetMenu() {
         document.gomenu.selector.selectedIndex = 2;
     }
