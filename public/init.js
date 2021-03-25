@@ -130,7 +130,7 @@ const URL_API_HOTSPOT_SERVER_PROFILE_ADD = `${URL_SERVER}api/hotspotServerProfil
 
 
 function logout() {
-    var r = confirm("Yakin mau logout dari aplikasi ?");
+    var r = confirm("Logout dari aplikasi ?");
     if (r == true) {
         Cookies.remove('id_admin')
         location.reload();
@@ -139,7 +139,7 @@ function logout() {
 }
 
 function disconnectRouter() {
-    var r = confirm("Yakin mau logout dari router ?");
+    var r = confirm("Disconnect dari router ?");
     if (r == true) {
         window.location.href = URL_DASHBOARD;
     }

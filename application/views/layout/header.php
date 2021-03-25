@@ -21,6 +21,7 @@
         ?>
 
         <li class=""><a style="cursor: pointer" onclick="logout();"><i class="icon-key"></i> <span class="text">Logout</span></a></li>
+        <li class=""><a style="cursor: pointer" onclick="disconnectRouter();"><i class="icon-off"></i> <span class="text" style="color: red">Disconnect</span></a></li>
     </ul>
 </div>
 

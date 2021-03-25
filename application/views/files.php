@@ -78,12 +78,12 @@
                             </center>
                         </div>
                         <div class="widget-content nopadding">
-                            <br>
+                           
                             <!-- content -->
-                            <div class="alert alert-info" v-for="data in data_files">
-                              
-                                <strong> <small>{{ data.name }}</small> </strong> | {{ convertByte(data.size) }}
-                                 {{data['creation-time']}} | {{data.type}}
+                            <div class="alert alert-success" v-for="data in data_files">
+                                <strong> {{ data.name }} </strong> <br> 
+                                <small>{{ convertByte(data.size) }} </small> ,
+                                 <small>{{data['creation-time']}} </small> , ({{data.type}}) 
                             </div>
                             <!-- content -->
                         </div>
