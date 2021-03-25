@@ -532,6 +532,14 @@ class API extends CI_Controller
 		validateToken($token);
 
 
+		if ($download==='unlimited'){
+			$download = '0';
+		}
+
+		if ($upload==='unlimited'){
+			$upload='0';
+		}
+
 		if ($this->connectRouter($ip_address, $username, $password,$port)) {
 			$this->RouterOS->comm("/queue/simple/add", array(
 				"name"     => $name,

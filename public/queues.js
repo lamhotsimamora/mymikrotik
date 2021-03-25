@@ -21,11 +21,76 @@ let $queues = new Vue({
                         console.log("Upzzz Something Is Wrong, Input Is Empty")
                         return;
                     }
+                    let $obj_fix = [];
                     if ($response) {
                         let $obj = JSON.parse($response);
+                        console.log($obj);
 
+                        for (let index = 0; index < $obj.length; index++) {
+                            const objj = $obj[index];
+
+                            const name = objj['name'];
+                            const id = objj['.id'];
+                            const target = objj['target'];
+                            let max_limit = objj['max-limit'];
+                            const priority = objj['priority'];
+                            const bytes = objj['bytes'];
+                            const dynamic = objj['dynamic'];
+                           
+                            
+                           if (max_limit==='0/0'){
+                               max_limit = 'unlimited/unlimited';
+
+                                $obj_fix.push({
+                                    ".id" : id,
+                                    name : name,
+                                    target : target,
+                                    'max-limit' : max_limit,
+                                    priority : priority,
+                                    bytes : bytes,
+                                    dynamic : dynamic
+                                })
+                           }else{
+                               
+                                const max_limit_length = max_limit.length;
+                                const find_garis_miring=  max_limit.search("/");
+
+                                const find_only_upload_zero = max_limit.substring(find_garis_miring, 0);
+                                let $upload = 0;
+
+                                if (find_only_upload_zero==='0'){
+                                    $upload = 'unlimited';
+                                }else{
+                                    $upload = find_only_upload_zero;
+                                }
+
+                                let $download = 0;
+
+                                const find_only_download_zero = max_limit.substring(find_garis_miring+1, max_limit_length);
+                               
+                                if (find_only_download_zero==='0'){
+                                    $download = 'unlimited';
+                                }else{
+                                    $download = find_only_download_zero;
+                                }
+
+                                $max_limit = $upload+"/"+$download;
+                                
+                                $obj_fix.push({
+                                    ".id" : id,
+                                    name : name,
+                                    target : target,
+                                    'max-limit' : max_limit,
+                                    priority : priority,
+                                    bytes : bytes,
+                                    dynamic : dynamic
+                                })
+                           }
+                           
+                        }
+                       
                         if ($obj) {
-                            this.data_queues = $obj;
+                            this.data_queues = $obj_fix;
                         } else {
                             this.data_queues = null;
                         }
@@ -35,6 +100,13 @@ let $queues = new Vue({
             })
         },
         resultByte: function(bytes) {
+          
+            console.log(bytes);
+            if (bytes==='unlimited/unlimited'){
+                return bytes;
+            }
+
+
             var index = bytes.search("/");
 
             let a = bytes.substring(0, index);

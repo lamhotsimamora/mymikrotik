@@ -261,8 +261,8 @@
     <script>
 
     const find_user_auto = localStorage.getItem("find_user_from_page_user_active");
-    console.log(find_user_auto)
-
+    
+    
     function goToHotspotServer() {
         window.location.href =
             "<?= base_url('admin/router/') . $data_router->{'id_router'}."/hotspot-server" ?>";

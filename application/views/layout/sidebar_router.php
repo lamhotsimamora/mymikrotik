@@ -23,36 +23,27 @@
         $$('sidebar_password_front').setAttribute('class','');
         $$('sidebar_setting_front').setAttribute('class','');
         $$('sidebar_about_front').setAttribute('class','');
-        $$('sidebar_client_front').setAttribute('class','');
+       
     }
 
     if ($dashboard_active==='sidebar_password_front'){
         $$('sidebar_home_front').setAttribute('class','');
         $$('sidebar_setting_front').setAttribute('class','');
         $$('sidebar_about_front').setAttribute('class','');
-        $$('sidebar_client_front').setAttribute('class','');
     }
 
     if ($dashboard_active==='sidebar_setting_front'){
         $$('sidebar_password_front').setAttribute('class','');
         $$('sidebar_home_front').setAttribute('class','');
         $$('sidebar_about_front').setAttribute('class','');
-        $$('sidebar_client_front').setAttribute('class','');
     }
 
     if ($dashboard_active==='sidebar_about_front'){
         $$('sidebar_password_front').setAttribute('class','');
         $$('sidebar_home_front').setAttribute('class','');
         $$('sidebar_setting_front').setAttribute('class','');
-        $$('sidebar_client_front').setAttribute('class','');
     }
 
-    if ($dashboard_active==='sidebar_client_front'){
-        $$('sidebar_password_front').setAttribute('class','');
-        $$('sidebar_home_front').setAttribute('class','');
-        $$('sidebar_setting_front').setAttribute('class','');
-        $$('sidebar_about_front').setAttribute('class','');
-    }
   }
  
 
