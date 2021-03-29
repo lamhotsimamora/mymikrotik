@@ -4,7 +4,8 @@
 </div>
 
 <script>
-new Vue({
+
+let $search_menu = new Vue({
     el: '#search',
     data: {
         query: null
