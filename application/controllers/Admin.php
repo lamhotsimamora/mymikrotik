@@ -13,6 +13,16 @@ class Admin extends CI_Controller
 		$this->load->view('home',$data);
 	}
 
+	public function showLogin(){
+
+		$admin = new JSONAdmin();
+
+		$data = $admin->read();
+		$data = json_decode($data);
+
+		var_dump($data);
+	}
+
 	public function proccessLogin()
 	{
 

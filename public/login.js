@@ -1,8 +1,8 @@
 let $login = new Vue({
     el: '#loginbox',
     data: {
-        username: 'lamhotsimamora',
-        password: 'Qwezxc123',
+        username: 'admin',
+        password: 'admin12345',
         text_or_password: 'password',
         text_button_show: 'Show password'
     },
