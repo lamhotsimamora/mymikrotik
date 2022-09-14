@@ -80,11 +80,10 @@
                             <!-- content -->
                             <div v-for="data in data_netwatch">
                                 <div :class="data.style" >
-                                {{ data.comment }} <br>
                                     <button class="close" data-dismiss="alert">×</button>
                                     <strong> <small>{{ data.host }}</small> 
-                                     </strong> <br>
-                                    <strong>{{data.status}}</strong>
+                                    | </strong> {{ data.comment }} 
+                                    | <strong>{{data.status}}</strong>
                                 </div>
                             </div>
                             <!-- content -->

@@ -2,8 +2,9 @@
   <!-- <a href="#" class="visible-phone"><i class="icon icon-home"></i> Homes</a> -->
     <ul>
         <li id="sidebar_home_front" class="active"><a onclick="saveSidebarActive('sidebar_home_front')" href="<?= base_url('admin') ?>"><i class="icon icon-home"></i> <span>Home</span></a> </li>
-        <li id="sidebar_password_front" class=""><a onclick="saveSidebarActive('sidebar_password_front')" href="<?= base_url('admin/username_password') ?>"><i class="icon icon-unlock"></i> <span>Username & Password</span></a> </li>
-       
+        <li id="sidebar_password_front" class=""><a onclick="saveSidebarActive('sidebar_password_front')" href="<?= base_url('admin/change_password') ?>"><i class="icon icon-unlock"></i> <span>Change Password</span></a> </li>
+        <li id="sidebar_client_front" class=""><a onclick="saveSidebarActive('sidebar_client_front')" href="<?= base_url('admin/client') ?>"><i class="icon  icon-user"></i> <span>Client</span></a> </li>
+    
         <li id="sidebar_setting_front" class=""><a onclick="saveSidebarActive('sidebar_setting_front')" href="<?= base_url('admin/setting') ?>"><i class="icon icon-cogs"></i> <span>Setting</span></a> </li>
         <li id="sidebar_about_front" class=""><a onclick="saveSidebarActive('sidebar_about_front')" href="<?= base_url('admin/about') ?>"><i class="icon icon-exclamation-sign"></i> <span>About</span></a> </li>
         
@@ -23,27 +24,36 @@
         $$('sidebar_password_front').setAttribute('class','');
         $$('sidebar_setting_front').setAttribute('class','');
         $$('sidebar_about_front').setAttribute('class','');
-       
+        $$('sidebar_client_front').setAttribute('class','');
     }
 
     if ($dashboard_active==='sidebar_password_front'){
         $$('sidebar_home_front').setAttribute('class','');
         $$('sidebar_setting_front').setAttribute('class','');
         $$('sidebar_about_front').setAttribute('class','');
+        $$('sidebar_client_front').setAttribute('class','');
     }
 
     if ($dashboard_active==='sidebar_setting_front'){
         $$('sidebar_password_front').setAttribute('class','');
         $$('sidebar_home_front').setAttribute('class','');
         $$('sidebar_about_front').setAttribute('class','');
+        $$('sidebar_client_front').setAttribute('class','');
     }
 
     if ($dashboard_active==='sidebar_about_front'){
         $$('sidebar_password_front').setAttribute('class','');
         $$('sidebar_home_front').setAttribute('class','');
         $$('sidebar_setting_front').setAttribute('class','');
+        $$('sidebar_client_front').setAttribute('class','');
     }
 
+    if ($dashboard_active==='sidebar_client_front'){
+        $$('sidebar_password_front').setAttribute('class','');
+        $$('sidebar_home_front').setAttribute('class','');
+        $$('sidebar_setting_front').setAttribute('class','');
+        $$('sidebar_about_front').setAttribute('class','');
+    }
   }
  
 

@@ -11,7 +11,7 @@ const URL_API_LOGIN = `${URL_SERVER}admin/proccessLogin`;
 const URL_API_CHECK_LOGIN = `${URL_SERVER}admin/checkLogin`;
 
 
-const URL_API_USERNAME_PASSWORD = `${URL_SERVER}admin/changeUsernamePassword`;
+const URL_API_CHANGE_PASSWORD = `${URL_SERVER}admin/changePassword`;
 
 
 const URL_API_SAVE_ROUTER = `${URL_SERVER}admin/saveRouter`;
@@ -37,7 +37,6 @@ const URL_API_GET_ROUTER_IDENTITY = `${URL_SERVER}api/getRouterIdentity`;
 
 const URL_API_ROUTER_SERVER_HOTSPOT = `${URL_SERVER}api/getServerHotspot`;
 const URL_API_ROUTER_SERVER_PROFILES = `${URL_SERVER}api/getServerProfile`;
-const URL_API_HOTSPOT_SERVER_PROFILE_DELETE = `${URL_SERVER}api/deleteHotspotServerProfile`;
 const URL_API_ROUTER_SERVER_USERS = `${URL_SERVER}api/getUsersVoucher`;
 const URL_API_ROUTER_USER_ACTIVE_HOTSPOT = `${URL_SERVER}api/getUsersHotspotActive`;
 
@@ -124,13 +123,11 @@ const URL_API_HOTSPOT_SERVER_ADD = `${URL_SERVER}api/hotspotServerAdd`;
 const URL_API_HOTSPOT_SERVER_DELETE = `${URL_SERVER}api/hotspotServerDelete`;
 const URL_API_FILE_DIRECTORY_GET = `${URL_SERVER}api/htmlDirectoryGet`;
 
-const URL_API_HOTSPOT_SERVER_PROFILE_ADD = `${URL_SERVER}api/hotspotServerProfileAdd`;
-
 // ==================================
 
 
 function logout() {
-    var r = confirm("Logout dari aplikasi ?");
+    var r = confirm("Yakin mau logout dari aplikasi ?");
     if (r == true) {
         Cookies.remove('id_admin')
         location.reload();
@@ -139,7 +136,7 @@ function logout() {
 }
 
 function disconnectRouter() {
-    var r = confirm("Disconnect dari router ?");
+    var r = confirm("Yakin mau logout dari router ?");
     if (r == true) {
         window.location.href = URL_DASHBOARD;
     }
@@ -171,32 +168,13 @@ function setActiveSidebar($el = null, $ell = null) {
 
 const _DATA_MENU_ = [
     'Dashboard',
-    'Wireless Interface',
-    'Wireless Registration',
     'Interface',
-    'PPP Interface',
-    'PPP Servers',
-    'PPP Secrets',
-    'PPP Profiles',
-    'IP Address',
-    'IP DNS',
-    'IP Route',
-    'IP Firewall',
-    'IP Pool',
-    'System Beep',
-    'System Package',
-    'System Files',
-    'System Log',
-    'System Reboot',
+    'IP Address', 'IP DNS', 'IP Route', 'IP Firewall', 'IP Pool',
+    'PPP Interface', 'PPP Servers', 'PPP Secrets', 'PPP Profiles',
+    'System Beep', 'System Log', 'System Reboot',
     'Queues',
-    'Hotspot Server',
-    'Hotspot Server Profiles',
-    'Hotspot User Profiles',
-    'Hotspot New User',
-    'Hotspot Multiple User',
-    'Hotspot Active',
+    'Hotspot Server', 'Hotspot Server Profiles', 'Hotspot User Profiles', 'Hotspot New User', 'Hotspot Multiple User', 'Hotspot Active',
     'Disconnect',
-    'Netwatch',
     'Logout',
 
 ]

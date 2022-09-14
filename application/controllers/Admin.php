@@ -13,73 +13,10 @@ class Admin extends CI_Controller
 		$this->load->view('home',$data);
 	}
 
-	public function showLogin(){
-
-		$admin = new JSONAdmin();
-
-		$data = $admin->read();
-		$data = json_decode($data);
-
-		var_dump($data);
-	}
-
-	public function proccessLogin()
-	{
-
-		$token       = $this->input->post('_token');
-		$username    = $this->input->post('_username');
-		$password    = $this->input->post('_password');
-
-		validateToken($token);
-
-		$response['result']  = false;
-		$response['id_admin'] = null;
-
-		if ($username != null && $password != null) {
-
-			$admin = new JSONAdmin;
-
-			$data = $admin->read();
-			$data = json_decode($data);
-
-			if ($username === $data->username_){
-				if ($password === $data->password_){
-					$response['id_admin'] = $data->id_admin;
-					$response['result']   = true;
-				}
-			}
-		} else {
-			$response['result'] = '404';
-		}
-		echo json_encode($response);
-	}
-
-
-	public function checkLogin()
-	{
-		checkLoginAjax();
-
-		$token    = $this->input->post('_token');
-		$id_admin  = $this->input->post('_id_admin');
-
-		validateToken($token);
-
-		if ($id_admin != null) {
-			$result = false;
-			if (isset($_COOKIE['id_admin'])){	
-				$result =($_COOKIE['id_admin']===$id_admin) ? true : false;
-			}
-			echo $result ? 'T' : 'F';
-		} else {
-			echo "404";
-		}
-	}
-
-
-	public function username_password(){
+	public function change_password(){
 		checkLogin();
 		$data['username_'] = $_COOKIE['username_'];
-		$this->load->view('username-password.php',$data);
+		$this->load->view('change-password',$data);
 	}
 
 	public function setting(){
@@ -88,6 +25,25 @@ class Admin extends CI_Controller
 		$this->load->view('setting',$data);
 	}
 
+	public function client($subUrl=null){
+		checkLogin();
+		$data['username_'] = $_COOKIE['username_'];
+
+		switch (strtolower($subUrl)) {
+			case 'payment':
+				$this->load->view('@client/payment',$data);
+				break;
+			case 'jenis':
+				$this->load->view('@client/jenis',$data);
+			break;
+			case 'bandwith':
+				$this->load->view('@client/bandwith',$data);
+			break;
+			default:
+			$this->load->view('@client/client',$data);
+			break;
+		}
+	}
 
 	public function jenis(){
 		checkLogin();
@@ -117,7 +73,66 @@ class Admin extends CI_Controller
 	}
 
 
-	
+	public function proccessLogin()
+	{
+
+		$token       = $this->input->post('_token');
+		$username    = $this->input->post('_username');
+		$password    = $this->input->post('_password');
+
+		validateToken($token);
+
+		$response['result']  = false;
+		$response['id_admin'] = null;
+
+		if ($username != null && $password != null) {
+
+			$admin = new JSONAdmin;
+
+			$data = $admin->read();
+			$data = json_decode($data);
+
+			if ($username === $data->username_){
+				if ($password === $data->password_){
+					$response['id_admin'] = $data->id_admin;
+					$response['result'] = true;
+				}
+			}
+		} else {
+			$response['result'] = '404';
+		}
+		echo json_encode($response);
+	}
+
+
+	public function checkLogin()
+	{
+		checkLoginAjax();
+
+		$token    = $this->input->post('_token');
+		$id_admin  = $this->input->post('_id_admin');
+
+		validateToken($token);
+
+		if ($id_admin != null) {
+			$result = false;
+
+			if (isset($_COOKIE['id_admin'])){	
+				if ($_COOKIE['id_admin']===$id_admin){
+					$result = true;
+				}
+			}
+
+			if ($result) {
+				echo "T";
+			} else {
+				echo "F";
+			}
+		} else {
+			echo "404";
+		}
+	}
+
 	public function updateRouter()
 	{
 		checkLoginAjax();
@@ -148,8 +163,11 @@ class Admin extends CI_Controller
 
 			$result = $this->M_router->updateData();
 
-			echo ($result) ? 'T' : 'F';
-				
+			if ($result) {
+				echo "T";
+			} else {
+				echo "F";
+			}
 		} else {
 			echo "404";
 		}
@@ -238,7 +256,7 @@ class Admin extends CI_Controller
 			$json->setFileName($id_admin);
 			
 			if ($json->checkFile()) {
-				$json->clear();
+				$json->clean();
 				echo 'T';
 			}else{
 				echo 'F';
@@ -342,7 +360,7 @@ class Admin extends CI_Controller
 		}
 	}
 
-	public function changeUsernamePassword(){
+	public function changePassword(){
 		checkLoginAjax();
 
 		$token    = $this->input->post('_token');
@@ -355,12 +373,16 @@ class Admin extends CI_Controller
 		if (isset($_COOKIE['id_admin'])) {
 
 			$json = new JSONAdmin;
+
 			$data = array("username_"=>$new_username, "password_"=>$new_password, "id_admin"=>$id_admin);
 			
 			$json->setData(
 				$data
 			);
+
+			
 			$json->convertToJson();
+
 			$json->create();
 
 			echo "T";

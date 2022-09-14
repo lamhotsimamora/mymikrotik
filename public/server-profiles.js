@@ -5,35 +5,6 @@ let $data_hotspot_profiles = new Vue({
         show: false
     },
     methods: {
-        deleteData: function($id) {
-            if ($id == null) {
-                return;
-            }
-
-            if (window.confirm("Yakin mau hapus data ?")) {
-                jnet({
-                    url: URL_API_HOTSPOT_SERVER_PROFILE_DELETE,
-                    method: 'post',
-                    data: {
-                        _token: _TOKEN_,
-                        _ip_address: $ip_address,
-                        _username: $username,
-                        _password: $password,
-                        _id: $id,
-                        _port: $port
-                    }
-                }).request($response => {
-                    if ($response) {
-                        if ($response === 'T') {
-                            this.loadData();
-                            alert("Data hotspot server profile berhasil dihapus !");
-                        } else {
-                            alert("Gagal menghapus data");
-                        }
-                    }
-                })
-            }
-        },
         loadData: function() {
             jnet({
                 url: URL_API_ROUTER_SERVER_PROFILES,
@@ -51,17 +22,13 @@ let $data_hotspot_profiles = new Vue({
                         console.log("Upzzz Something Is Wrong, Input Is Empty")
                         return;
                     }
-                    try {
-                        let $obj = JSON.parse($response);
+                    let $obj = JSON.parse($response);
 
-                        $loading.show = false;
-                        if ($obj) {
-                            this.data_hotspot_profiles = $obj;
-                        } else {
-                            this.data_hotspot_profiles = null;
-                        }
-                    } catch (error) {
-                        console.log(error)
+                    $loading.show = false;
+                    if ($obj) {
+                        this.data_hotspot_profiles = $obj;
+                    } else {
+                        this.data_hotspot_profiles = null;
                     }
                 }
             })
@@ -99,27 +66,12 @@ let $form_data = new Vue({
                         console.log("Upzzz Something Is Wrong, Input Is Empty")
                         return;
                     }
-                    try {
-                        let $obj = JSON.parse($response);
+                    let $obj = JSON.parse($response);
 
-                        let $directory_filter = [];
-                        let index_dir = 0;
-                        for (let index = 0; index < $obj.length; index++) {
-                            const type = $obj[index].type;
-
-                            if (type === 'directory') {
-                                $directory_filter[index_dir] = $obj[index];
-                                index_dir++;
-                            }
-                        }
-
-                        if ($obj) {
-                            this.data_htmldirectory = $directory_filter;
-                        } else {
-                            this.data_htmldirectory = null;
-                        }
-                    } catch (error) {
-                        console.log(error)
+                    if ($obj) {
+                        this.data_htmldirectory = $obj;
+                    } else {
+                        this.data_htmldirectory = null;
                     }
                 }
             })
@@ -130,38 +82,25 @@ let $form_data = new Vue({
                 return;
             }
 
-            if (this.hotspot_address == null || this.hotspot_address === '') {
-                this.$refs.hotspot_address.focus();
-                return;
-            }
-
-            if (this.name == null || this.dns_name === '') {
-                this.$refs.dns_name.focus();
-                return;
-            }
-
             jnet({
-                url: URL_API_HOTSPOT_SERVER_PROFILE_ADD,
+                url: URL_API_IP_ADDRESS_ADD,
                 method: 'post',
                 data: {
                     _token: _TOKEN_,
                     _ip_address: $ip_address,
                     _username: $username,
                     _password: $password,
-                    _name: this.name,
-                    _address_hotspot: this.hotspot_address,
-                    _dns: this.dns_name,
-                    _htmldir: this.htmldirectory,
+                    _interface: this.interface,
+                    _ipaddress: this.ip_address,
                     _port: $port
                 }
             }).request($response => {
                 if ($response) {
                     if ($response === 'T') {
-                        $data_hotspot_profiles.loadData();
-                        this.name = null;
-                        this.hotspot_address = null;
-                        this.dns_name = null;
-                        alert("Hotspot SErver Profile berhasil ditambahkan");
+                        $ipaddress.loadData();
+                        this.nterface = null;
+                        this.ip_address = null;
+                        alert("IP Address berhasil ditambahkan");
                     } else {
                         alert("Gagal tambah data");
                     }

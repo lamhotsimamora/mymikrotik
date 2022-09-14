@@ -5,7 +5,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 <html lang="en">
 
 <head>
-    <title>Change Username & Password</title>
+    <title>Jenis</title>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="<?= base_url('public/'); ?>css/bootstrap.min.css" />
@@ -29,23 +29,23 @@ defined('BASEPATH') or exit('No direct script access allowed');
 </head>
 
 <body>
-    
-<script src="<?= base_url('public/'); ?>init.js"></script>
+
+    <script src="<?= base_url('public/'); ?>init.js"></script>
     <!--Header-part-->
     <div id="header">
-        <h1><a href="dashboard.html">My Mikrotik</a></h1>
+        <h1><a href=".">My Mikrotik</a></h1>
     </div>
     <!--close-Header-part-->
 
-    <!--top-Header-menu-->
-    <?php include('layout/header.php'); ?>
+      <!--top-Header-menu-->
+      <?php include dirname(__FILE__, 2) . '/layout/header.php'; ?>
 
-    <!--start-top-serch-->
-    <?php include('layout/search.php'); ?>
-    <!--close-top-serch-->
+<!--start-top-serch-->
+<?php include dirname(__FILE__, 2) . '/layout/search.php'; ?>
+<!--close-top-serch-->
 
-    <!--sidebar-menu-->
-    <?php include 'layout/sidebar_router.php'; ?>
+<!--sidebar-menu-->
+<?php include dirname(__FILE__, 2) . '/layout/sidebar_router.php'; ?>
 
     <div id="content">
         <div id="content-header">
@@ -64,34 +64,30 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
                         </div>
                         <div class="widget-content nopadding collapse in">
-                            <div id="username-password" class="widget-content nopadding">
-                                <form class="form-horizontal">
-                                    <div class="control-group">
-                                        <label class="control-label">Username</label>
-                                        <div class="controls">
-                                            <input v-model="new_username" ref="new_username" type="text" class="span11"
-                                                placeholder="New Username" />
-                                        </div>
-                                    </div>
-                                    <div class="control-group">
-                                        <label class="control-label">Password</label>
-                                        <div class="controls">
-                                            <input v-model="new_password" :type="type_password" class="span11"
-                                                placeholder="New Password" />
-                                                <h6>
-                                                <a @click="showPassword" href="#">Show Password</a>
-                                               
-                                                </h6> 
-                                        </div>
-                                      
-                                    </div>
-                                   
-                                    <div class="form-actions">
-                                    <center>
-                                        <button type="button" @click="update" class="btn btn-success">Save</button>
-                                    </center>
-                                    </div>
-                                </form>
+                            <div id="jenis" class="widget-content nopadding" v-cloak>
+                                <center>
+                                    <button href="#modal_add" data-toggle="modal"
+                                        class="btn btn-primary btn-sm">+</button>
+                                </center>
+                                <table class="table table-bordered" v-cloak>
+                                    <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Jenis</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr v-for="(data,i) in data_jenis">
+                                            <td>{{data.id_jenis}}</td>
+                                            <td>{{data.jenis}}</td>
+                                            <td>
+                                                <button @click="deleteData(data.id_jenis)"
+                                                    class="btn btn-danger btn-mini">x</button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
@@ -107,8 +103,31 @@ defined('BASEPATH') or exit('No direct script access allowed');
             </div>
         </div>
     </div>
+
+    <div id="modal_add" class="modal hide">
+        <div class="modal-header">
+            <button id="btn_close_modal" data-dismiss="modal" class="close" type="button">x</button>
+            <h3></h3>
+        </div>
+        <div class="modal-body">
+            <div class="control-group">
+                <label class="control-label">Jenis</label>
+                <div class="controls">
+                    <input type="text" class="span4" ref="jenis" v-model="jenis" placeholder="Jenis" />
+                </div>
+            </div>
+
+           
+
+            <button class="btn btn-primary btn-md" @click="save">Save</button>
+
+        </div>
+    </div>
+
+
     <!--Footer-part-->
-    <?php include 'layout/footer.php'; ?>
+   
+    <?php include dirname(__FILE__, 2) . '/layout/footer.php'; ?>
 
 
 
@@ -119,23 +138,23 @@ defined('BASEPATH') or exit('No direct script access allowed');
     <script src="<?= base_url('public/'); ?>js/jquery.min.js"></script>
     <script src="<?= base_url('public/'); ?>js/jquery.ui.custom.js"></script>
     <script src="<?= base_url('public/'); ?>js/bootstrap.min.js"></script>
- 
+
 
     <script>
     // check id admin in storage
     const _TOKEN_ = "<?= _TOKEN_APP_ ?>";
+
+    function goToJenisPage() {
+        window.location.href = URL_SERVER + 'admin/jenis';
+    }
     </script>
 
     <script src="<?= base_url('public/') ?>auth-login.js"></script>
 
 
-    <script src="<?= base_url('public/') ?>username-password.js"></script>
-
-    <script>
+    <script src="<?= base_url('public/') ?>jenis.js"></script>
 
 
-
-    </script>
 
 </body>
 

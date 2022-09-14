@@ -157,8 +157,8 @@
             </li>
         </div>
 
-        <!-- <li><a href="#" class="" onclick="disconnectRouter();"><i class="icon icon-off"></i> <span
-                    style="color: red">Disconnect</span></a></li> -->
+        <li><a href="#" class="" onclick="disconnectRouter();"><i class="icon icon-off"></i> <span
+                    style="color: red">Disconnect</span></a></li>
     </ul>
 </div>
 

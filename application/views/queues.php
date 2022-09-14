@@ -32,11 +32,11 @@
     const _TOKEN_ = "<?= _TOKEN_APP_ ?>";
   </script>
   <script>
-    const $id_router  = "<?= $data_router->{'id_router'} ?>";
-    const $username   = "<?= $data_router->{'username_'} ?>";
-    const $password   = "<?= $data_router->{'password_'} ?>";
+    const $id_router = "<?= $data_router->{'id_router'} ?>";
+    const $username = "<?= $data_router->{'username_'} ?>";
+    const $password = "<?= $data_router->{'password_'} ?>";
     const $ip_address = "<?= $data_router->{'ip_address'} ?>";
-    const $port        = "<?= $data_router->{'port_api'} ?>";
+    const $port = "<?= $data_router->{'port_api'} ?>";
   </script>
 
   <!--Header-part-->

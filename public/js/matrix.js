@@ -80,7 +80,7 @@ $(document).ready(function() {
     // === Search input typeahead === //
     $('#search input[type=text]').typeahead({
         source: _DATA_MENU_,
-        items: 25
+        items: 16
     });
 
     // === Fixes the position of buttons group in content header and top user navigation === //

@@ -148,13 +148,11 @@
                                     <select class="form-control" @change="loadDataByComment($event)" v-model="comments"
                                         class="form-control">
                                         <option :value="comments" v-for="comments in data_comments">{{ comments }}
-                                        </option> 
-                                    </select> 
-                                    <strong>{{ jml_comment }}</strong>
+                                        </option>
+                                    </select>
                                 </div>
                                 <button class="btn btn-secondary btn-sm" @click="printVoucher">Print</button>
-                                <button class="btn btn-primary btn-sm" @click="printAll">Print All</button>
-                                <button class="btn btn-success btn-sm" @click="refresh">Refresh</button>
+                                <button class="btn btn-secondary btn-sm" @click="printAll">Print All</button>
                             </div>
 
                             <center id="loading" v-cloak>
@@ -241,8 +239,6 @@
 
 
     <script>
-      const find_user_auto = localStorage.getItem("find_user_from_page_user_active");
-    
     function goToHotspotServer() {
         window.location.href =
             "<?= base_url('admin/router/') . $data_router->{'id_router'}."/hotspot-server" ?>";

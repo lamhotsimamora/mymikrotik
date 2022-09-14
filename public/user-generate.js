@@ -9,13 +9,9 @@ let $comment = new Vue({
     el: '#select_comment',
     data: {
         comments: null,
-        data_comments: null,
-        jml_comment: null
+        data_comments: null
     },
     methods: {
-        refresh: function() {
-            $data_hotspot_users.loadData();
-        },
         loadDataByComment: function() {
             let $data = $data_original_user;
             $data_filter_user_by_comment = [];
@@ -30,7 +26,6 @@ let $comment = new Vue({
 
             }
             $data_hotspot_users.data_hotspot_users = $data_filter_user_by_comment;
-            this.jml_comment = $data_filter_user_by_comment.length;
         },
         printVoucher: function() {
             localStorage.setItem('data_voucher_ready_to_print', JSON.stringify($data_hotspot_users.data_hotspot_users));
@@ -109,7 +104,6 @@ let $data_hotspot_users = new Vue({
         },
         loadData: function($callback = null) {
             $loading.show = true;
-            this.jml_comment = null;
             jnet({
                 url: URL_API_ROUTER_SERVER_USERS,
                 method: 'post',
@@ -165,14 +159,10 @@ let $data_hotspot_users = new Vue({
     },
     mounted() {
         this.loadData(function() {
-            try {
-                if (find_user_auto) {
-                    $search_user_m.search_query = find_user_auto;
-                    localStorage.removeItem("find_user_from_page_user_active");
-                    $search_user_m.cariData();
-                }
-            } catch (e) {
-                console.log(e)
+            if (find_user_auto) {
+                $search_user_m.search_query = find_user_auto;
+                localStorage.removeItem("find_user_from_page_user_active");
+                $search_user_m.cariData();
             }
         })
     }

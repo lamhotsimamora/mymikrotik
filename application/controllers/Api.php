@@ -146,62 +146,6 @@ class API extends CI_Controller
 			echo "F";
 		}
 	}
-	
-	public function hotspotServerProfileAdd(){
-		checkLoginAjax();
-		$ip_address  = $this->input->post('_ip_address');
-		$username  = $this->input->post('_username');
-		$password  = $this->input->post('_password');
-		$token  = $this->input->post('_token');
-		$name  = $this->input->post('_name');
-		$hotspot_address  = $this->input->post('_address_hotspot');
-		$dns_name  = $this->input->post('_dns');
-		$htmldir  = $this->input->post('_htmldir');
-		$port = $this->input->post('_port');
-
-		__check(array($ip_address,$username,$password,$port,$name,$hotspot_address,$dns_name,$htmldir));
-		validateToken($token);
-
-
-		if ($this->connectRouter($ip_address, $username, $password,$port)) {
-			$this->RouterOS->comm("/ip/hotspot/profile/add", array(
-				"name"     => $name,
-				"hotspot-address" => $hotspot_address,
-				"dns-name" => $dns_name,
-				"html-directory" => $htmldir,
-			));
-			$this->RouterOS->disconnect();
-
-			echo "T";
-		} else {
-			echo "F";
-		}
-	}
-
-	public function deleteHotspotServerProfile(){
-		checkLoginAjax();
-		$ip_address  = $this->input->post('_ip_address');
-		$username  = $this->input->post('_username');
-		$password  = $this->input->post('_password');
-		$token  = $this->input->post('_token');
-		$id  = $this->input->post('_id');
-		$port = $this->input->post('_port');
-
-		__check(array($ip_address,$username,$password,$port,$id));
-		validateToken($token);
-
-
-		if ($this->connectRouter($ip_address, $username, $password,$port)) {
-			$this->RouterOS->comm("/ip/hotspot/profile/remove", array(
-				"numbers"     => $id
-			));
-			$this->RouterOS->disconnect();
-
-			echo "T";
-		} else {
-			echo "F";
-		}
-	}
 
 	public function deleteQueues(){
 		checkLoginAjax();
@@ -275,7 +219,7 @@ class API extends CI_Controller
 			$read = $this->RouterOS->read(false);
 			$data = $this->RouterOS->parseResponse($read);
 			
-			echo (json_encode($data));
+			var_dump(json_encode($data));
 		} else {
 			echo "F";
 		}
@@ -531,14 +475,6 @@ class API extends CI_Controller
 		__check(array($ip_address,$username,$password,$port,$name,$target,$download,$upload));
 		validateToken($token);
 
-
-		if ($download==='unlimited'){
-			$download = '0';
-		}
-
-		if ($upload==='unlimited'){
-			$upload='0';
-		}
 
 		if ($this->connectRouter($ip_address, $username, $password,$port)) {
 			$this->RouterOS->comm("/queue/simple/add", array(

@@ -78,10 +78,10 @@
                         <div class="widget-content nopadding">
                             <br>
                             <!-- content -->
-                            <div class="alert alert-secondary" v-for="data in data_package">
+                            <div class="alert alert-success" v-for="data in data_package">
                                 
-                                <strong> {{ data.name.toUpperCase() }}  </strong> <br> <small>{{ data.version }}</small>
-                                 , <small>{{data['build-time']}}</small>
+                                <strong> {{ data.name.toUpperCase() }} | </strong> <small>{{ data.version }}</small>
+                                 | <small>{{data['build-time']}}</small>
                             </div>
                             <!-- content -->
                         </div>

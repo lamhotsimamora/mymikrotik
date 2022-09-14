@@ -181,7 +181,6 @@ let $search_user_m = new Vue({
                 const name = obj.name.toString();
 
                 if (name === $query) {
-                    console.log("Name " + name)
                     $match.push(obj);
                 }
             }

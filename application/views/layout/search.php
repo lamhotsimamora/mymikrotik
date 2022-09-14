@@ -4,8 +4,7 @@
 </div>
 
 <script>
-
-let $search_menu = new Vue({
+new Vue({
     el: '#search',
     data: {
         query: null
@@ -21,11 +20,12 @@ let $search_menu = new Vue({
                 this.$refs.query.focus();
                 return;
             }
-            console.log(this.query);
             this.directTo();
         },
         goTo: function($page = '') {
            const URL = _URL_PAGE_ + $id_router +"/"+ $page;
+        
+
            window.location.href = URL;
         },
         directTo: function() {
@@ -33,47 +33,10 @@ let $search_menu = new Vue({
             console.log($fix)
             switch ($fix) {
                 case _DATA_MENU_[0].toLowerCase():
-                    this.goTo('dashboard');
+                    this.goTo();
                     break;
                 case _DATA_MENU_[1].toLowerCase():
-                    this.goTo('wireless-interface');
-                    
-                    break;
-                case _DATA_MENU_[2].toLowerCase():
-                    this.goTo('wireless-registration');
-                    break;
-                case _DATA_MENU_[3].toLowerCase():
                     this.goTo('interface');
-                    break;
-                case _DATA_MENU_[4].toLowerCase():
-                    this.goTo('ppp-interface');
-                    break;
-                case _DATA_MENU_[5].toLowerCase():
-                    this.goTo('ppp-servers');
-                    break;
-                case _DATA_MENU_[6].toLowerCase():
-                    this.goTo('ppp-secrets');
-                    break;
-                case _DATA_MENU_[7].toLowerCase():
-                    this.goTo('ppp-profiles');
-                    break;
-                case _DATA_MENU_[8].toLowerCase():
-                    this.goTo('ipaddress');
-                    break;
-                case _DATA_MENU_[9].toLowerCase():
-                    this.goTo('ipdns');
-                    break;
-                case _DATA_MENU_[10].toLowerCase():
-                    this.goTo('iproute');
-                    break;
-                case _DATA_MENU_[11].toLowerCase():
-                    this.goTo('ipfirewall');
-                    break;
-                case _DATA_MENU_[12].toLowerCase():
-                    this.goTo('ippool');
-                    break;
-                case _DATA_MENU_[13].toLowerCase():
-                    this.goTo('ipservice');
                     break;
                 default:
                     break;

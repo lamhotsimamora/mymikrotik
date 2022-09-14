@@ -107,7 +107,7 @@
                                         <td>{{data['html-directory']}}</td>
                                         <td>{{data['rate-limit']}}</td>
                                         <td>
-                                        <button @click="deleteData(data['.id'])" class="btn btn-danger btn-mini">x</button>
+                                            <button class="btn btn-danger btn-mini">x</button>
                                         </td>
                                     </tr>
                                 </tbody>

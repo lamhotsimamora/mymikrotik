@@ -5,7 +5,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 <html lang="en">
 
 <head>
-    <title>About</title>
+    <title>Change Password</title>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="<?= base_url('public/'); ?>css/bootstrap.min.css" />
@@ -24,11 +24,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
     <style>
     [v-cloak] {
         display: none;
-    }
-
-    .light {
-        font-size: 20px;
-        color: #d63031;
     }
     </style>
 </head>
@@ -55,7 +50,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
     <div id="content">
         <div id="content-header">
             <div id="breadcrumb"> <a href="<?= base_url('admin/index') ?>" title="Go to Home" class="tip-bottom"><i
-                        class="icon-home"></i> About</a></div>
+                        class="icon-home"></i> Home</a></div>
         </div>
         <div class="quick-actions_homepage">
 
@@ -69,27 +64,29 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
                         </div>
                         <div class="widget-content nopadding collapse in">
-                            <div id="" class="widget-content nopadding">
-        <div class="widget-content">
-            <div class="bs-docs-example">
-              <h3>
-                  <center>Aplikasi MyMikrotik</center>
-              </h3>
-              <hr>
-              <h4>
-                  Version : <strong class="light">1.0.0</strong>
-              </h4>
-              <h4>
-                  Author : <strong class="light">Lamhot Simamora</strong>
-              </h4>
-              <h4>
-                  Company : <a href="https://pdrtechnology.net/" target="_blank"><strong class="light">PDR Technology</strong></a>
-              </h4>
-              <h4>
-                  Github : <a href="https://github.com/lamhotsimamora" target="_blank"><strong class="light">https://github.com/lamhotsimamora</strong></a>
-              </h4>
-            </div>
-          </div>
+                            <div id="change-password" class="widget-content nopadding">
+                                <form class="form-horizontal">
+                                    <div class="control-group">
+                                        <label class="control-label">New Username</label>
+                                        <div class="controls">
+                                            <input v-model="new_username" ref="new_username" type="text" class="span11"
+                                                placeholder="First name" />
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label">New Password</label>
+                                        <div class="controls">
+                                            <input v-model="new_password" type="password" class="span11"
+                                                placeholder="Enter Password" />
+                                        </div>
+                                    </div>
+
+                                    <div class="form-actions">
+                                    <center>
+                                        <button type="button" @click="update" class="btn btn-success">Save</button>
+                                    </center>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -117,7 +114,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
     <script src="<?= base_url('public/'); ?>js/jquery.min.js"></script>
     <script src="<?= base_url('public/'); ?>js/jquery.ui.custom.js"></script>
     <script src="<?= base_url('public/'); ?>js/bootstrap.min.js"></script>
-   
+ 
 
     <script>
     // check id admin in storage
@@ -127,6 +124,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
     <script src="<?= base_url('public/') ?>auth-login.js"></script>
 
 
+    <script src="<?= base_url('public/') ?>change-password.js"></script>
 
     <script>
 
