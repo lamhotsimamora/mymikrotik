@@ -67,9 +67,11 @@ class API extends CI_Controller
 					echo 'F';
 				}
 			}
-		} catch (\Throwable $th) {
-			exit(var_dump($th));
+		} catch (Exception $ex) {
+			(var_dump($ex));
+			return false;
 		}
+		
 	}
 
 	public function getNetwatch(){
