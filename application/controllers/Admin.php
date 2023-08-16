@@ -29,7 +29,7 @@ class Admin extends CI_Controller
 		checkLogin();
 		$data['username_'] = $_COOKIE['username_'];
 
-		switch (strtolower($subUrl)) {
+		switch (strtolower($subUrl??'')) {
 			case 'payment':
 				$this->load->view('@client/payment',$data);
 				break;

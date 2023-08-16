@@ -108,6 +108,7 @@ $modal_add = new Vue({
                 return;
             }
 
+
             jnet({
                 url: URL_API_CLIENT_ADD,
                 method: 'post',

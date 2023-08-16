@@ -64,9 +64,18 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                     class="icon-chevron-down"></i> </span> <h4>Bandwith</h4>
 
                         </div>
+                        <script type="text/javascript">
+                            function back(){
+                                $server = "<?= base_url()?>";
+
+                                window.location.href=$server+"admin/client";
+                            }
+                        </script>
                         <div class="widget-content nopadding collapse in"> 
                             <div id="bandwith" class="widget-content nopadding" v-cloak>
                                 <center>
+                                     <button onclick="back()"
+                                        class="btn btn-success btn-sm">Back</button>
                                     <button href="#modal_add" data-toggle="modal"
                                         class="btn btn-primary btn-sm">+</button>
                                 </center>
