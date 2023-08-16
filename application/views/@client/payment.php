@@ -92,7 +92,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                     <tbody>
                                         <tr v-for="(data) in data_payment">
                                             <td>{{data.nama}}</td>
-                                            <td>{{data.bandwith}} MB - {{ _moneyFormat(data.price) }}</td>
+                                            <td>{{data.bandwith}} MB </td>
                                             <td>{{data.tgl_pasang}}</td>
                                             <td>{{data.tgl_bayar}}</td>
                                             <td>{{_moneyFormat(data.jml_pay)}}</td>

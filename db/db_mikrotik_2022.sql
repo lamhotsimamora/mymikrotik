@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 15, 2023 at 03:14 PM
+-- Generation Time: Aug 16, 2023 at 07:35 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -59,7 +59,7 @@ CREATE TABLE `t_client` (
 --
 
 INSERT INTO `t_client` (`id_client`, `nama`, `tgl_pasang`, `id_jenis`, `id_bandwith`) VALUES
-(7, 'lamhot simamora', '2023-08-15', 1, 1);
+(10, 'Lamhot Simamora', '2023-08-16', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -90,8 +90,18 @@ INSERT INTO `t_jenis` (`id_jenis`, `jenis`) VALUES
 
 CREATE TABLE `t_payment` (
   `id_payment` int(11) NOT NULL,
-  `id_client` int(11) NOT NULL
+  `id_client` int(11) NOT NULL,
+  `jml_pay` double NOT NULL,
+  `tgl_bayar` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `t_payment`
+--
+
+INSERT INTO `t_payment` (`id_payment`, `id_client`, `jml_pay`, `tgl_bayar`) VALUES
+(2, 7, 500000, '2023-08-18'),
+(3, 10, 500000, '2023-08-16');
 
 -- --------------------------------------------------------
 
@@ -113,11 +123,34 @@ CREATE TABLE `view_client` (
 -- --------------------------------------------------------
 
 --
+-- Stand-in structure for view `view_payment`
+-- (See below for the actual view)
+--
+CREATE TABLE `view_payment` (
+`id_payment` int(11)
+,`id_client` int(11)
+,`jml_pay` double
+,`tgl_bayar` date
+,`nama` varchar(77)
+);
+
+-- --------------------------------------------------------
+
+--
 -- Structure for view `view_client`
 --
 DROP TABLE IF EXISTS `view_client`;
 
 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `view_client`  AS SELECT `t_client`.`id_client` AS `id_client`, `t_client`.`nama` AS `nama`, `t_client`.`tgl_pasang` AS `tgl_pasang`, `t_client`.`id_jenis` AS `id_jenis`, `t_client`.`id_bandwith` AS `id_bandwith`, `t_jenis`.`jenis` AS `jenis`, `t_bandwith`.`price` AS `price`, `t_bandwith`.`bandwith` AS `bandwith` FROM ((`t_client` join `t_jenis`) join `t_bandwith`) WHERE `t_client`.`id_jenis` = `t_jenis`.`id_jenis` AND `t_bandwith`.`id_bandwith` <> 00  ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `view_payment`
+--
+DROP TABLE IF EXISTS `view_payment`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `view_payment`  AS SELECT `t_payment`.`id_payment` AS `id_payment`, `t_payment`.`id_client` AS `id_client`, `t_payment`.`jml_pay` AS `jml_pay`, `t_payment`.`tgl_bayar` AS `tgl_bayar`, `t_client`.`nama` AS `nama` FROM (`t_payment` join `t_client`) WHERE `t_payment`.`id_client` = `t_client`.`id_client``id_client`  ;
 
 --
 -- Indexes for dumped tables
@@ -161,7 +194,7 @@ ALTER TABLE `t_bandwith`
 -- AUTO_INCREMENT for table `t_client`
 --
 ALTER TABLE `t_client`
-  MODIFY `id_client` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id_client` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `t_jenis`
@@ -173,7 +206,7 @@ ALTER TABLE `t_jenis`
 -- AUTO_INCREMENT for table `t_payment`
 --
 ALTER TABLE `t_payment`
-  MODIFY `id_payment` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_payment` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
