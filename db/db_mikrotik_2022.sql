@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 16, 2023 at 07:35 AM
+-- Generation Time: Aug 21, 2023 at 04:27 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -33,13 +33,6 @@ CREATE TABLE `t_bandwith` (
   `price` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data for table `t_bandwith`
---
-
-INSERT INTO `t_bandwith` (`id_bandwith`, `bandwith`, `price`) VALUES
-(1, 10, 500000);
-
 -- --------------------------------------------------------
 
 --
@@ -53,13 +46,6 @@ CREATE TABLE `t_client` (
   `id_jenis` int(11) NOT NULL,
   `id_bandwith` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `t_client`
---
-
-INSERT INTO `t_client` (`id_client`, `nama`, `tgl_pasang`, `id_jenis`, `id_bandwith`) VALUES
-(10, 'Lamhot Simamora', '2023-08-16', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -95,14 +81,6 @@ CREATE TABLE `t_payment` (
   `tgl_bayar` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data for table `t_payment`
---
-
-INSERT INTO `t_payment` (`id_payment`, `id_client`, `jml_pay`, `tgl_bayar`) VALUES
-(2, 7, 500000, '2023-08-18'),
-(3, 10, 500000, '2023-08-16');
-
 -- --------------------------------------------------------
 
 --
@@ -132,6 +110,9 @@ CREATE TABLE `view_payment` (
 ,`jml_pay` double
 ,`tgl_bayar` date
 ,`nama` varchar(77)
+,`price` double
+,`bandwith` int(11)
+,`tgl_pasang` date
 );
 
 -- --------------------------------------------------------
@@ -150,7 +131,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `view_payment`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `view_payment`  AS SELECT `t_payment`.`id_payment` AS `id_payment`, `t_payment`.`id_client` AS `id_client`, `t_payment`.`jml_pay` AS `jml_pay`, `t_payment`.`tgl_bayar` AS `tgl_bayar`, `t_client`.`nama` AS `nama` FROM (`t_payment` join `t_client`) WHERE `t_payment`.`id_client` = `t_client`.`id_client``id_client`  ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `view_payment`  AS SELECT `t_payment`.`id_payment` AS `id_payment`, `t_payment`.`id_client` AS `id_client`, `t_payment`.`jml_pay` AS `jml_pay`, `t_payment`.`tgl_bayar` AS `tgl_bayar`, `view_client`.`nama` AS `nama`, `view_client`.`price` AS `price`, `view_client`.`bandwith` AS `bandwith`, `view_client`.`tgl_pasang` AS `tgl_pasang` FROM (`t_payment` join `view_client`) WHERE `t_payment`.`id_client` = `view_client`.`id_client``id_client`  ;
 
 --
 -- Indexes for dumped tables
@@ -188,13 +169,13 @@ ALTER TABLE `t_payment`
 -- AUTO_INCREMENT for table `t_bandwith`
 --
 ALTER TABLE `t_bandwith`
-  MODIFY `id_bandwith` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_bandwith` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `t_client`
 --
 ALTER TABLE `t_client`
-  MODIFY `id_client` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id_client` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `t_jenis`
@@ -206,7 +187,7 @@ ALTER TABLE `t_jenis`
 -- AUTO_INCREMENT for table `t_payment`
 --
 ALTER TABLE `t_payment`
-  MODIFY `id_payment` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_payment` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
