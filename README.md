@@ -1,5 +1,7 @@
 # mymikrotik
 
+Minimum PHP versi 8
+
 Get Started
 
 Cara instalasi di laptop 
