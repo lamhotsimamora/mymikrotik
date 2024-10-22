@@ -21,6 +21,7 @@ class RouterosAPI
     var $connected = false; //  Connection state
     var $port      = 8728;  //  Port to connect to (default 8729 for ssl)
     var $ssl       = false; //  Connect using SSL (must enable api-ssl in IP/Services)
+    var $certless  = false; //  Set SSL SECLEVEL=0 to allow SSL with no certificates
     var $timeout   = 3;     //  Connection attempt timeout and data read timeout
     var $attempts  = 5;     //  Connection attempt count
     var $delay     = 3;     //  Delay between connection attempts in seconds
@@ -92,20 +93,15 @@ class RouterosAPI
      *
      * @return boolean                If we are connected or not
      */
-    public function connect($ip, $login, $password,$port=null)
+    public function connect($ip, $login, $password)
     {
-
-        if ($port==null){
-            $_PORT_CLIENT = $this->port;
-        }else{
-            $_PORT_CLIENT = $port;
-        }
         for ($ATTEMPT = 1; $ATTEMPT <= $this->attempts; $ATTEMPT++) {
             $this->connected = false;
             $PROTOCOL = ($this->ssl ? 'ssl://' : '' );
-            $context = stream_context_create(array('ssl' => array('ciphers' => 'ADH:ALL', 'verify_peer' => false, 'verify_peer_name' => false)));
-            $this->debug('Connection attempt #' . $ATTEMPT . ' to ' . $PROTOCOL . $ip . ':' . $_PORT_CLIENT . '...');
-            $this->socket = @stream_socket_client($PROTOCOL . $ip.':'. $_PORT_CLIENT, $this->error_no, $this->error_str, $this->timeout, STREAM_CLIENT_CONNECT,$context);
+            $CERTLESS = ($this->certless ? ':@SECLEVEL=0' : '' );
+            $context = stream_context_create(array('ssl' => array('ciphers' => 'ADH:ALL' . $CERTLESS, 'verify_peer' => false, 'verify_peer_name' => false)));
+            $this->debug('Connection attempt #' . $ATTEMPT . ' to ' . $PROTOCOL . $ip . ':' . $this->port . '...');
+            $this->socket = @stream_socket_client($PROTOCOL . $ip.':'. $this->port, $this->error_no, $this->error_str, $this->timeout, STREAM_CLIENT_CONNECT,$context);
             if ($this->socket) {
                 socket_set_timeout($this->socket, $this->timeout);
                 $this->write('/login', false);
@@ -139,8 +135,6 @@ class RouterosAPI
                 fclose($this->socket);
             }
             sleep($this->delay);
-
-            throw new Exception("Login Failed ! Check IP Address ! Check Username & Password ! Check Service Port API");
         }
 
         if ($this->connected) {
@@ -349,7 +343,7 @@ class RouterosAPI
                 $this->debug('>>> [' . $LENGTH . ', ' . $STATUS['unread_bytes'] . ']' . $_);
             }
 
-            if ((!$this->connected && !$STATUS['unread_bytes']) || ($this->connected && !$STATUS['unread_bytes'] && $receiveddone)) {
+            if ((!$this->connected && !$STATUS['unread_bytes']) || ($this->connected && !$STATUS['unread_bytes'] && $receiveddone) || $STATUS['timed_out']) {
                 break;
             }
         }
