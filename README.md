@@ -11,4 +11,6 @@ Cara instalasi di laptop
 4. Buat daatabase dengan nama db_mikrotik_2022 
 5. Lalu import file didalam folder db
 6. Buka di chrome localhost/mymikrotik
-7. Selesai
+7. Setting file .setting sesuaikan url nya
+8. Login admin password admin
+9. Selesai
