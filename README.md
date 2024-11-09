@@ -14,3 +14,6 @@ Cara instalasi di laptop
 7. Setting file .setting sesuaikan url nya
 8. Login admin password admin
 9. Selesai
+
+## DEMO 
+http://103.126.226.164:1234
