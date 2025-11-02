@@ -256,7 +256,7 @@ class Admin extends CI_Controller
 			$json->setFileName($id_admin);
 			
 			if ($json->checkFile()) {
-				$json->clean();
+				$json->clear();
 				echo 'T';
 			}else{
 				echo 'F';

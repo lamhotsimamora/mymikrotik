@@ -7,149 +7,177 @@ defined('BASEPATH') or exit('No direct script access allowed');
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Print Standart Voucher</title>
+    <title>Print Voucher </title>
     <script src="<?= base_url('public/'); ?>js/js.cookie.min.js"></script>
+    <script src="<?= base_url('public/'); ?>js/garuda.js"></script>
     <script src="<?= base_url('public/'); ?>js/vue.js"></script>
     <link href="<?= base_url('public/css/'); ?>font-google.css" rel="stylesheet" />
     <link rel="icon" href="<?= base_url('public/') ?>img/router.png" type="image/gif" sizes="16x16">
+
     <style>
-    [v-cloak] {
-        display: none;
-    }
+        [v-cloak] {
+            display: none;
+        }
 
-    .container {
-        display: grid;
-        width: 100px;
-        margin: auto auto;
-        grid-template-columns: auto auto auto  ;
-        grid-template-rows: auto auto auto ;
-    }
+        body {
+            font-family: 'Courier New', monospace;
+            background: #ffffff;
+            margin: 0;
+            padding: 0;
+        }
 
-    .voucher {
-        width: 150px;
-        height: 260px;
-        background:#22a6b3;
-        position: relative;
-        border: 1px solid grey;
-        margin: 2px 15px 11px 11px;
-    }
+        /* 🔹 Grid otomatis menyesuaikan lebar kertas */
+        .container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(8cm, 1fr));
+            gap: 0.8cm;
+            justify-content: center;
+            padding: 1cm;
+            box-sizing: border-box;
+        }
 
-    .small {
-        font-size: 5;
-        font-family: 'Courier New', Courier, monospace;
-        color: #ecf0f1;
-    }
+        /* 🔹 Desain voucher besar */
+        .voucher {
+            background: linear-gradient(160deg, #22a6b3, #0984e3);
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
+            padding: 15px;
+            color: #fff;
+            height: 8.5cm;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            text-align: center;
+            page-break-inside: avoid;
+        }
 
-    .big {
-        font-size: 5;
-        font-family: 'Courier New', Courier, monospace;
-        color: #130f40;
-    }
-    .img{
-        
-    }
+        .voucher img {
+            width: 70px;
+            margin-bottom: 8px;
+        }
+
+        .voucher hr {
+            border: none;
+            border-top: 1px dashed rgba(255, 255, 255, 0.7);
+            width: 80%;
+            margin: 6px 0;
+        }
+
+        /* 🔹 Label dan nilai lebih besar */
+        .label {
+            font-size: 13pt;
+            color: #ecf0f1;
+            letter-spacing: 0.5px;
+        }
+
+        .value {
+            font-size: 18pt;
+            font-weight: bold;
+            color: #130f40;
+            background: #ecf0f1;
+            padding: 4px 10px;
+            border-radius: 6px;
+            display: inline-block;
+            margin-top: 4px;
+        }
+
+        .footer {
+            font-size: 12pt;
+            color: #f5f6fa;
+            margin-top: 8px;
+            font-weight: bold;
+        }
+
+        /* 🔹 Tampilan untuk print */
+        @media print {
+            body {
+                margin: 0;
+                padding: 0;
+                background: white;
+            }
+
+            @page {
+                size: A4 portrait;
+                margin: 0.8cm;
+            }
+
+            .container {
+                grid-template-columns: repeat(auto-fit, minmax(8cm, 1fr));
+                gap: 0.5cm;
+                padding: 0;
+                margin: 0;
+            }
+
+            .voucher {
+                box-shadow: none;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+        }
     </style>
 </head>
 
-<body><br>
-
+<body>
     <div id="app" class="container" v-cloak>
-        <div v-for="(data_user) in data_user">
-            <div class="voucher">
-                <center>
-                    <img class="img" src="<?= base_url('public/') ?>img/logo.png" alt="">
-                </center>
+        <div v-for="(data_user, index) in data_user" :key="index" class="voucher">
+            <div>
+                <img src="<?= base_url('public/') ?>img/logo.png" alt="logo">
                 <hr>
-                <center class="small">Username</center> <br>
-                <center class="big"><strong>{{ data_user.username }}</strong> </center>
+                <div class="label">USERNAME</div>
+                <div class="value">{{ data_user.username }}</div>
                 <hr>
-                <center class="small">Password</center><br>
-                <center class="big"><strong>{{ data_user.password }}</strong></center>
+                <div class="label">PASSWORD</div>
+                <div class="value">{{ data_user.password }}</div>
                 <hr>
-                <center class="small">Limit : {{data_user['limit']}} <br>
-                    <hr>
-                    <strong class="small">
-                        {{data_user.identity}}
-                    </strong>
-            </div><br>
-        </div>
-        <div id="space" v-cloak>
-            <br><br>
+                <div class="label">LIMIT</div>
+                <div class="value">{{ data_user.limit }}</div>
+            </div>
+            <div class="footer">{{ data_user.identity }}</div>
         </div>
     </div>
-</body>
-<script>
-    
-if (!localStorage.getItem('data_voucher_ready_to_print')) {
-    window.location.href = URL_SERVER + 'admin/index';
-}
 
-new Vue({
-    el: '#app',
-    data: {
-        data_user: null
-    },
-    methods: {
-        load: function() {
-            let $data_user = JSON.parse(localStorage.getItem('data_voucher_ready_to_print'));
-            let identity = Cookies.get('identity_mikrotik');
-
-            // get all data voucher and add identity
-            let $data_voucher = [];
-            let length_voucher = $data_user.length;
-
-            if (length_voucher > 20) {
-                for (let index = 0; index < 20; index++) {
-                    let key = $data_user[index];
-                    let $limit;
-
-                    if (key['limit-uptime']!= undefined){
-                        $limit = key['limit-uptime'].replace("h", " Jam");
-                    }else if (key['limit-uptime']===undefined){
-                        $limit = key.profile;
-                    }
-                    else{
-                        $limit = key['limit-uptime'];
-                    }
-                    $data_voucher.push({
-                        username: key.name,
-                        password: key.password,
-                        identity: identity,
-                        limit: $limit
-                    })
-                    console.log($limit);
-                }
-            } else {
-                for (let index = 0; index < $data_user.length; index++) {
-                    let key = $data_user[index];
-                    let $limit;
-                    
-                    if (key['limit-uptime']!= undefined){
-                        $limit = key['limit-uptime'].replace("h", " Jam");
-                    }
-                    else if (key['limit-uptime']===undefined){
-                        $limit = key.profile;
-                    }
-                    else{
-                        $limit = key['limit-uptime'];
-                    }
-                    console.log($limit);
-                    $data_voucher.push({
-                        username: key.name,
-                        password: key.password,
-                        identity: identity,
-                        limit: $limit
-                    })
-                }
-            }
-
-            this.data_user = $data_voucher;
+    <script>
+        if (!localStorage.getItem('data_voucher_ready_to_print')) {
+            window.location.href = URL_SERVER + 'admin/index';
         }
-    },
-    mounted() {
-        this.load();
-    },
-})
-</script>
 
+        _setTitle("Print Voucher "+Cookies.get('identity_mikrotik'));
+
+        new Vue({
+            el: '#app',
+            data: {
+                data_user: []
+            },
+            methods: {
+                load() {
+                    let dataLocal = JSON.parse(localStorage.getItem('data_voucher_ready_to_print'));
+                    let identity = Cookies.get('identity_mikrotik') || "MikroTik Hotspot";
+                    let vouchers = [];
+
+                    dataLocal.slice(0, 50).forEach(key => {
+                        let limit = "-";
+                        if (key['limit-uptime']) {
+                            limit = key['limit-uptime'].replace("h", " Jam");
+                        } else if (key.profile) {
+                            limit = key.profile;
+                        }
+                        vouchers.push({
+                            username: key.name,
+                            password: key.password,
+                            limit: limit,
+                            identity: identity
+                        });
+                    });
+
+                    this.data_user = vouchers;
+                }
+            },
+            mounted() {
+                this.load();
+            },
+        });
+    </script>
+</body>
 </html>

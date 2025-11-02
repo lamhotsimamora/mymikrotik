@@ -145,6 +145,7 @@ let $data_hotspot_users = new Vue({
                             }
 
                         }
+                        
                         $comment.data_comments = $data_comment_fix;
                     } else {
                         this.data_hotspot_users = null;
