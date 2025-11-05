@@ -156,7 +156,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                     let identity = Cookies.get('identity_mikrotik') || "MikroTik Hotspot";
                     let vouchers = [];
 
-                    dataLocal.slice(0, 50).forEach(key => {
+                    dataLocal.forEach(key => {
                         let limit = "-";
                         if (key['limit-uptime']) {
                             limit = key['limit-uptime'].replace("h", " Jam");
@@ -176,6 +176,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
             },
             mounted() {
                 this.load();
+                window.print()
             },
         });
     </script>
